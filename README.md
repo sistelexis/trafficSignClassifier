@@ -108,9 +108,11 @@ My final model results were:
 
 ### Use the model to make predictions on new images
 In order to be as realistic as it could be, I used Goolgle Earth Street View from German roads (around Cologne and in front of the train station at Frankfurt) to collect signs in a real situation. The signs have all been correctly indentified, as it can be seen on the images below.  
-Coordinates from Cologne are available on the jcImages folder.
-Since the Google Earth Street View pictures are tacken by a car, that ensures that the position is a valid one for an autonomous car. The only difference could be how high is the camera on the Google car, if compared where stands a camera on a self driving car. But it can be compared to a small truck camera position.
-The images have no relevant weaknesses besides the angle or the lack of brightness. And the results shows that although the probability differences between the top two are smaller than with other images, it is still more than enough to avoid affecting the right identification.
+Coordinates from Cologne are available on the jcImages folder.  
+
+Since the Google Earth Street View pictures are tacken by a car, that ensures that the position is a valid one for an autonomous car. The only difference could be how high is the camera on the Google car, if compared where stands a camera on a self driving car. But it can be compared to a small truck camera position.  
+
+The images have no relevant weaknesses besides the angle or the lack of brightness. And the results shows that although the probability differences between the top two are smaller than with other images, it is still more than enough to avoid affecting the right identification. The last sign (Go straight or right) is interesting since it is a combination of two other signs (Ahead only and Turn right ahead).
 
 <table border="0"><tr><td><img src="readmeImg/myImg1.png" width="100" /></td><td><img src="readmeImg/myImg2.png" width="100" /></td><td><img src="readmeImg/myImg3.png" width="100" /></td><td><img src="readmeImg/myImg7.png" width="100" /></td><td><img src="readmeImg/myImg8.png" width="100" /></td><td><img src="readmeImg/myImg9.png" width="100" /></td></tr></table>
 
