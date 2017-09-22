@@ -23,11 +23,11 @@ One important detail was to load, besides the images and the labels, the zoom in
 
 ### Explore, summarize and visualize the data set
 The data sets have the following amount of images:
-* Number of training examples = 34799
-* Number of validation examples = 4410
-* Number of testing examples = 12630
-* Images are 32 x 32 RGB.
-* There are 43 different signs type.  
+* The size of training set is? 34799  
+* The size of validation set is? 4410  
+* The size of test set is? 12630  
+* The shape of a traffic sign image is? 32 x 32 x 3  
+* The  number of unique classes/labels in the data set is? 43  
 
 Looking at the data sets, we can easily see that image count per sign class is very uneven. In fact, some signs are represented over 10 times more than others. That distribution is the same on all the three data sets.
 
@@ -60,7 +60,7 @@ Then, in order to level the number of images per sign class, I randomly applied 
 
 Finally, starting from the suggested LeNet model, that was from scratch only a few 4 or 5% away from the required value (I must admit, that later I have to fight it hard to get there. So those few turned out to be a lot), I started my learning process to understand how the model would manage to achieve the required test accuracy of 93%.  
 
-To train the model, I made some tests to identify an acceptable learning rate, using the batch size of 128 already coming from the LeNet project. I also maintained the Adam Optimizer.  
+To train the model, I made some tests to identify an acceptable learning rate, using the batch size of 128 already coming from the LeNet project. I also maintained the Adam Optimizer. Those tests were made with 30% of the augmented training set.  
 
 I then understood that I should overfit the model. To achieve it, I started adding filters to the existing layers and started seeing some good improvements. Then I finally added a third convolution layer.  
 
@@ -93,13 +93,24 @@ Since the results were getting quite near the required value, and the curves wer
 ![loss curve](jcLogs/learning_curve_loss_cv1_5_12_cv2_5_32_cv3_3_64_100perc_200ep.png)
 ![accu curve](jcLogs/learning_curve_accuracy_cv1_5_12_cv2_5_32_cv3_3_64_100perc_200ep.png)
 
+So, here are my final training details:
+* Batch size -> 128
+* Learning rate -> 0.0005
+* Optimizer -> Adam Optimizer
+* Epochs -> 200
+* mu -> 0
+* sigma -> 0.1
+
 My final model results were:
 * training set accuracy of 98%  
 * validation set accuracy of 96% 
 * test set accuracy of 93%
 
 ### Use the model to make predictions on new images
-In order to be as realistic as it could be, I used Goolgle Earth Street View from German roads (around Cologne and in front of the train station at Frankfurt) to collect signs in a real situation. The signs have all been correctly indentified, as it can be seen on the images below.
+In order to be as realistic as it could be, I used Goolgle Earth Street View from German roads (around Cologne and in front of the train station at Frankfurt) to collect signs in a real situation. The signs have all been correctly indentified, as it can be seen on the images below.  
+Coordinates from Cologne are available on the jcImages folder.
+Since the Google Earth Street View pictures are tacken by a car, that ensures that the position is a valid one for an autonomous car. The only difference could be how high is the camera on the Google car, if compared where stands a camera on a self driving car. But it can be compared to a small truck camera position.
+The images have no relevant weaknesses besides the angle or the lack of brightness. And the results shows that although the probability differences between the top two are smaller than with other images, it is still more than enough to avoid affecting the right identification.
 
 <table border="0"><tr><td><img src="readmeImg/myImg1.png" width="100" /></td><td><img src="readmeImg/myImg2.png" width="100" /></td><td><img src="readmeImg/myImg3.png" width="100" /></td><td><img src="readmeImg/myImg7.png" width="100" /></td><td><img src="readmeImg/myImg8.png" width="100" /></td><td><img src="readmeImg/myImg9.png" width="100" /></td></tr></table>
 
@@ -114,12 +125,22 @@ Here are the results of the prediction:
 | Yield					| Yield 		     							|
 | Go straight or right	| Go straight or right 							|
 
-The model was able to correctly guess 6 of the 6 traffic signs, which gives an accuracy of 100%. 
+The model was able to correctly guess 6 of the 6 traffic signs, which gives an accuracy of 100%. That is a better/higher result than with the test set that only achieved 93.1%
 
 ### Analyze the softmax probabilities of the new images
-The model has identified the signs with probabilities from 50 to 80%. The second options had probabilities between 5 and 20%.
+The model has identified the signs with probabilities from 50 to 80%. The second options had probabilities between 5 and 20%.  
+The certainty looks very good since the ratio between the highest and second best probability is always over 2 and reaches well over 10 for two images.  
 
 ![myImgs eval](readmeImg/myImgs_eval.png)
+
+| Image			        |first to second highest prob ratio	| 
+|:---------------------:|:---------------------------------:| 
+| Keep right         	| 13.9   						   	| 
+| No entry     			| 2.2 								|
+| Priority road			| 11.6								|
+| Ahead only      		| 2.9			 					|
+| Yield					| 3.3 		     					|
+| Go straight or right	| 2.5 								|
 
 ### Summarize the results with a written report
 To achieve the 93% accuracy for the test set, I had to test different parameters until it became clear what will provide better results.  
